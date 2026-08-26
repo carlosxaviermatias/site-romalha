@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Remover .php das URLs
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^blog/(.+)$ blog-detalhe.php?slug=$1 [QSA,L]
+    RewriteRule ^blog/?$ blog.php [QSA,L]
+    RewriteRule ^admin/?$ admin/index.php [QSA,L]
+    RewriteRule ^api/(.*)$ api.php [QSA,L]
+    RewriteRule ^(.+)\.php$ - [L]
+</IfModule>
+
+# Segurança
+<FilesMatch "\.php$">
+    <IfModule mod_authz_core.c>
+        # Permite apenas arquivos PHP específicos
+    </IfModule>
+</FilesMatch>
